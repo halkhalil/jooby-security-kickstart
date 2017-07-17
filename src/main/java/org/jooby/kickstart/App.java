@@ -208,7 +208,7 @@ import org.jooby.pac4j.Auth;
 
 public class App extends Jooby {
   {
-    use(new Auth());
+    use(new Auth().basic("*", AppAuthentication.class));
 
     get("/", () -> "Hello World!");
   }

@@ -52,12 +52,15 @@ public final class AppAuthentication implements Authenticator<UsernamePasswordCr
     if (!stream(users).anyMatch(withUsername(credentials))) throw new CredentialsException("Username not found");
   }
 
-  private Predicate<Map<String, Object>> withUsername(UsernamePasswordCredentials credentials) {
+  private Predicate<Map<String, Object>> withUsername(final UsernamePasswordCredentials credentials) {
     return user -> user.get(USERNAME).equals(credentials.getUsername());
   }
 
-  private Predicate<Map<String, Object>> forValid(UsernamePasswordCredentials credentials) {
-    return user -> user.get(USERNAME).equals(credentials.getUsername()) && user.get(PASSWORD).equals(credentials.getPassword());
+  private Predicate<Map<String, Object>> forValid(final UsernamePasswordCredentials credentials) {
+    final String username = credentials.getUsername();
+    final String password = credentials.getPassword();
+
+    return user -> user.get(USERNAME).equals(username) && user.get(PASSWORD).equals(password);
   }
 
   private CommonProfile asProfile(final Map<String, Object> user) {
