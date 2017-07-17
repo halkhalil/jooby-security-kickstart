@@ -204,9 +204,12 @@
 package org.jooby.kickstart;
 
 import org.jooby.Jooby;
+import org.jooby.pac4j.Auth;
 
 public class App extends Jooby {
   {
+    use(new Auth());
+
     get("/", () -> "Hello World!");
   }
 
